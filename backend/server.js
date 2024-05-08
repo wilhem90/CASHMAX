@@ -3,6 +3,7 @@ const app = express()
 const cors = require("cors")
 const router = require("./routes")
 
+
 app.use(cors())
 app.use(router)
 
