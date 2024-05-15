@@ -1,12 +1,17 @@
 const express = require("express")
-const app = express()
+const bodyparser = require("body-parser")
+const cors = require("cors")
+const userRouter = require("./routes/userRoutes")
+const userMiddleware = require("./middlleware/userMiddlleware")
 require("dotenv").config()
 
-const router = require("./routes/userRoutes.js")
-const PORT = process.env.PORT || 9090
+const app = express()
+app.use(cors())
+app.use(userMiddleware)
+app.use(bodyparser.json())
+app.use(userRouter)
 
-app.use(router)
-
+const PORT = process.env.PORT || 9098
 app.listen(PORT, () => {
-    console.log(`O servidor esta rodando na porta:\n http://localhost:${PORT}`);
+    console.log(`Servidor esta rodando na porta:\nhttp://localhost:${PORT}`);
 })

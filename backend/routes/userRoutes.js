@@ -1,11 +1,12 @@
 const express = require("express")
-const router = express.Router()
+const userRouter = express.Router()
+const Usercontroller = require("../controllers/UserController")
 
-
-router.get('/user', (req, res) => {
+userRouter.get("/users", (req, res) => {
     res.status(200).send({
-        "error": 0,
-        "message": "Access Successful!"
+        error: 0,
+        message: "Hello World!",
     })
 })
-module.exports = router
+
+module.exports = userRouter
