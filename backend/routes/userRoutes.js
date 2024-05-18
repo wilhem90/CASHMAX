@@ -1,12 +1,12 @@
 const express = require("express")
-const userRouter = express.Router()
-const Usercontroller = require("../controllers/UserController")
+const router = express.Router()
+const UserController = require("../controllers/UserController")
 
-userRouter.get("/users", (req, res) => {
-    res.status(200).send({
-        error: 0,
-        message: "Hello World!",
-    })
-})
 
-module.exports = userRouter
+router.get("/users", UserController.getUsers)
+router.get("/test", UserController.testUsers)
+router.get("/users/:id", UserController.getUserById)
+router.post("/users", UserController.createUser)
+router.put("/users/:id", UserController.updateUser)
+router.delete("/users/:id", UserController.deleteUser)
+module.exports = router

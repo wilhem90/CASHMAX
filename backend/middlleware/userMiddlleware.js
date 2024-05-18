@@ -1,13 +1,18 @@
-const authMidlleware = (req, res, next) => {
-    const maxi = true
-    if (maxi === true) {
+
+function verify(req, res, next) {
+    const login = false
+    if (login === true) {
+        console.log("Logado com sucesso!");
         next()
-    }else{
-        console.log("Precisa logar para ter acesso!");
-        res.status(500).json({ 
+    }else {
+        console.log("Login required!");
+        res.status(401).send({
             error: 1,
-            message: 'Server Error' });
+            message: "Login required!"
+        })
     }
 }
 
-module.exports = authMidlleware
+
+
+module.exports = verify
