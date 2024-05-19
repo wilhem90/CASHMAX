@@ -1,5 +1,3 @@
-alert(51+5)
-
 const users = document.querySelector('.users')
 async function getUser() {
     const http = await fetch('http://localhost:3333/users')
