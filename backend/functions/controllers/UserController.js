@@ -1,3 +1,7 @@
+require('dotenv').config()
+
+
+const acces_token = process.env.ACCESS_TOKEN
 const { db, query, where,
     getDoc,
     getDocs,
@@ -103,19 +107,32 @@ const UserController = {
 
     
         testUsers: async (req, res) => {
-            const userUid = 'BvBQc76Fncb9PWPRjZPmULttufa'; 
-            try {
-                const q = query(collection(db, 'users'), where('uid', '==', userUid));
-                const snapshot = await getDocs(q);
-                const users = snapshot.docs.map(doc => doc.data());
-                console.log(users);
-                res.status(200).json(users); // Responder com os dados do usuário
-            } catch (error) {
-                console.error('Erro ao buscar usuários:', error);
-                res.status(500).json({ message: 'Erro ao buscar usuários', error });
+            const url = 'https://api.dingconnect.com/api/V1/GetCountries'
+            
+        const options = {
+            method: 'GET',
+            headers: {
+                cookie: '__cf_bm=J0XDibzqouWOtZDlX55FMgtrFL8N6.rwfLPEVUnBFY4-1718588421-1.0.1.1-7z.XWxeMQZgreqwqLByrx5TTjMfAgDnpdYxDy183NAzn1ZzrYLBZZwmX8YjaKPxwr.ZLCJRhG.zpAAlf2XyErA',
+                Authorization: `Bearer ${acces_token}`
             }
+
         }
 
+        try {
+            await fetch(url, options)
+            .then(response => response.json())
+            .then(data => {
+                res.status(200).send({
+                    data
+                })
+            })
+        } catch (error) {
+            res.status(200).send({
+                error
+            })
+        }
+
+    }
 }
 
 module.exports = UserController
